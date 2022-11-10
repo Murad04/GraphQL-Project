@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6da981d1-c720-4ef9-9d16-3c8f42747868</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.1.1" />
+    <PackageReference Include="Hotchocolate.AspNetCore" Version="12.15.2" />
+    <PackageReference Include="Hotchocolate.Data.Entityframework" Version="12.15.2" />
+    <PackageReference Include="Microsoft.EntityframeworkCore.Design" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityframeworkCore.SqlServer" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

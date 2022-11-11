@@ -10,7 +10,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddPooledDbContextFactory<AppDBContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddGraphQLServer().AddQueryType<Query>();
+builder.Services.AddGraphQLServer().AddQueryType<Query>().AddProjections();
 
 var app = builder.Build();
 

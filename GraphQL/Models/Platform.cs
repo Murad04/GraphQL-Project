@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GraphQL.GraphQL;
+using System.ComponentModel.DataAnnotations;
 
 namespace GraphQL.Models
 {
@@ -13,5 +14,7 @@ namespace GraphQL.Models
 
         [Required]
         public string License { get; set; } = null!;
+
+        public ICollection<Command> Commands { get; set; } = new List<Command>();
     }
 }

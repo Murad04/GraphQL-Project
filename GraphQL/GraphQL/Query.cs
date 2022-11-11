@@ -5,7 +5,8 @@ namespace GraphQL.GraphQL
 {
     public class Query
     {
-        public IQueryable<Platform> GetPlatforms([Service] AppDBContext context)
+        [UseDbContext(typeof(AppDBContext))]
+        public IQueryable<Platform> GetPlatforms([ScopedService] AppDBContext context)
         {
             return context.Platforms;
         }

@@ -1,10 +1,10 @@
-﻿using GraphQL.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GraphQL.GraphQL
+namespace GraphQL.Models
 {
     public class Command
     {
-        [key]
+        [Key]
         public int Id { get; set; }
         public string HowTo { get; set; } = null!;
         public string CommandLine { get; set; } = null!;

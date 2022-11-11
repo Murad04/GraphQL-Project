@@ -1,5 +1,6 @@
 using GraphQL.Data;
 using GraphQL.GraphQL;
+using GraphQL.Server.Ui.Voyager;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,4 +25,8 @@ app.UseRouting();
 
 app.MapGraphQL();
 
+app.UseGraphQLVoyager("/graphql-voyager", new VoyagerOptions()
+{
+    GraphQLEndPoint = "/graphql",
+});
 app.Run();

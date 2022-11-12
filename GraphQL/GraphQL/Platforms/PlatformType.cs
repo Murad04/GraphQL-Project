@@ -22,7 +22,7 @@ namespace GraphQL.GraphQL.Platforms
         {
             public IQueryable<Command> GetCommands(Platform platform, [ScopedService] AppDBContext context)
             {
-                return context.Commands.Where(c => c.PlatformID == platform.ID);
+                return context.Commands.Where(p => p.PlatformID == platform.ID);
             }
         }
     }

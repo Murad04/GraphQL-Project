@@ -12,7 +12,7 @@ namespace GraphQL.GraphQL.Platforms
             descriptor.Field(p => p.License).Ignore();
 
             descriptor
-                .Field(p => p.Commands)
+                .Field(p => p.Command)
                 .ResolveWith<Resolvers>(p => p.GetCommands(default!, default!))
                 .UseDbContext<AppDBContext>()
                 .Description("This is the list of available commands for this platform");

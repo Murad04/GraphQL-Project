@@ -5,11 +5,25 @@
 namespace GraphQL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCommandtoDB : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Platforms",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    License = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Platforms", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Commands",
                 columns: table => new
@@ -42,6 +56,9 @@ namespace GraphQL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Commands");
+
+            migrationBuilder.DropTable(
+                name: "Platforms");
         }
     }
 }

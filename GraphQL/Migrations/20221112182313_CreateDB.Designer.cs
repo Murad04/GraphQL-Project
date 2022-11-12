@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraphQL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20221109063442_AddPlatformtoDB")]
-    partial class AddPlatformtoDB
+    [Migration("20221112182313_CreateDB")]
+    partial class CreateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,32 @@ namespace GraphQL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GraphQL.Models.Command", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CommandLine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowTo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlatformID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlatformID");
+
+                    b.ToTable("Commands");
+                });
 
             modelBuilder.Entity("GraphQL.Models.Platform", b =>
                 {
@@ -43,6 +69,22 @@ namespace GraphQL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Platforms");
+                });
+
+            modelBuilder.Entity("GraphQL.Models.Command", b =>
+                {
+                    b.HasOne("GraphQL.Models.Platform", "Platform")
+                        .WithMany("Command")
+                        .HasForeignKey("PlatformID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("GraphQL.Models.Platform", b =>
+                {
+                    b.Navigation("Command");
                 });
 #pragma warning restore 612, 618
         }

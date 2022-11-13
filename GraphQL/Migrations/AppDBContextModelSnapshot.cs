@@ -71,7 +71,7 @@ namespace GraphQL.Migrations
             modelBuilder.Entity("GraphQL.Models.Command", b =>
                 {
                     b.HasOne("GraphQL.Models.Platform", "Platform")
-                        .WithMany("Command")
+                        .WithMany("Commands")
                         .HasForeignKey("PlatformID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -81,7 +81,7 @@ namespace GraphQL.Migrations
 
             modelBuilder.Entity("GraphQL.Models.Platform", b =>
                 {
-                    b.Navigation("Command");
+                    b.Navigation("Commands");
                 });
 #pragma warning restore 612, 618
         }

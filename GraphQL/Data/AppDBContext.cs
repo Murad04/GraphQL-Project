@@ -15,13 +15,13 @@ namespace GraphQL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Platform>()
-                .HasMany(p => p.Command)
+                .HasMany(p => p.Commands)
                 .WithOne(p => p.Platform!)
                 .HasForeignKey(p => p.PlatformID);
 
             modelBuilder.Entity<Command>()
                 .HasOne(p => p.Platform)
-                .WithMany(p => p.Command)
+                .WithMany(p => p.Commands)
                 .HasForeignKey(p => p.PlatformID);
 
             base.OnModelCreating(modelBuilder);

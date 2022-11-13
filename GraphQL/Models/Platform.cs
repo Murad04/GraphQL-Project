@@ -13,6 +13,6 @@ namespace GraphQL.Models
         [Required]
         public string License { get; set; } = null!;
 
-        public ICollection<Command> Command { get; set; } = new List<Command>();
+        public ICollection<Command> Commands { get; set; } = new List<Command>();
     }
 }

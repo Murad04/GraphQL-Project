@@ -6,14 +6,16 @@ namespace GraphQL.GraphQL
     public class Query
     {
         [UseDbContext(typeof(AppDBContext))]
-        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Platform> GetPlatforms([ScopedService] AppDBContext context)
         {
             return context.Platforms;
         }
 
         [UseDbContext(typeof(AppDBContext))]
-        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Command> GetCommands([ScopedService] AppDBContext context)
         {
             return context.Commands;

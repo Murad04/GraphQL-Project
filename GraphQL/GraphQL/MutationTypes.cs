@@ -2,13 +2,18 @@
 using GraphQL.GraphQL.Commands;
 using GraphQL.GraphQL.Platforms;
 using GraphQL.Models;
+using HotChocolate.Subscriptions;
 
 namespace GraphQL.GraphQL
 {
     public class MutationTypes
     {
         [UseDbContext(typeof(AppDBContext))]
-        public async Task<AddPlatformPayload> AddPlatformAsync(AddPlatformInput input, [ScopedService] AppDBContext context)
+        public async Task<AddPlatformPayload> AddPlatformAsync(
+            AddPlatformInput input,
+            [Service] ITopicEventSender eventSender,
+            CancellationToken cancellationToken,
+            [ScopedService] AppDBContext context)
         {
             var platform = new Platform
             {
@@ -16,7 +21,9 @@ namespace GraphQL.GraphQL
                 License = input.LicenseKey
             };
             context.Platforms.Add(platform);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
+
+            await eventSender.SendAsync(nameof(Subscription.OnPlatformAdded), platform, cancellationToken);
 
             return new AddPlatformPayload(platform);
         }
